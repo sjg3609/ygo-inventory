@@ -21,6 +21,7 @@ app.use('/buildDecks', deckConceptRouter);
 app.post('/search', (req, res) => {
   axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=${req.body.value}`)
   .then(response => {
+    console.log('server.js check', response.data)
     res.send(response.data);
   }).catch((error) => {
     console.log(`Error in YGOProDeck Request: ${error}`);

@@ -20,6 +20,7 @@ inventoryRouter.get('/getCards', (req,res) => {
 inventoryRouter.get('/totalCards', (req,res) => {
   const queryText = `Select SUM(quantity) as "total_card_quantity" from "inventory";`;
   pool.query(queryText).then((result) => {
+    console.log(result.rows);
     res.send(result.rows);
   }).catch((error) => {
     console.log(`Error in /totalCards: ${error}`);

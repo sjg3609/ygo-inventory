@@ -12,6 +12,8 @@ function CardInfoPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  console.log('cardInfoPage check', cardInfo);
+
   const backToSearch = () => {
     dispatch({ type: 'RESET_QUANTITY' })
     dispatch({ type: 'RESET_LOCATION' });

@@ -1,12 +1,17 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './CardStyle.css';
+import { useSelector } from 'react-redux';
 
 function CardItem({ card }) {
   const [cardColor, setCardColor] = useState('transparent');
   const [textColor, setTextColor] = useState('black');
   const [gradientFromColor, setGradientFromColor] = useState('transparent');
   const [gradientToColor, setGradientToColor] = useState('transparent');
+
+  const cardData = useSelector(store => store.searchData);
+
+  // console.log('Checking card data', cardData[0].card_images.image_url);
 
   const colorChange = () => {
     if (card.type === 'Normal Monster' || card.type === 'Gemini Monster') {
@@ -78,6 +83,10 @@ function CardItem({ card }) {
     style={{ backgroundColor: cardColor, 
     color: textColor, 
     backgroundImage: `linear-gradient(0deg, ${gradientToColor}, ${gradientFromColor})`}}>
+      {card.card_images.map(data => (
+        <>{data.image_url_small}</>
+      ))}
+      <a>{card.card_images.image_url_small}</a>
       <h3><center>{card.name}</center></h3>
       <ul>
         <li><b>Type:</b> <i>{card.type}</i></li>
