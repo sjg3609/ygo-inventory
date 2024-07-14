@@ -84,9 +84,8 @@ function CardItem({ card }) {
     color: textColor, 
     backgroundImage: `linear-gradient(0deg, ${gradientToColor}, ${gradientFromColor})`}}>
       {card.card_images.map(data => (
-        <>{data.image_url_small}</>
+        <img src={data.image_url_small}/>
       ))}
-      <a>{card.card_images.image_url_small}</a>
       <h3><center>{card.name}</center></h3>
       <ul>
         <li><b>Type:</b> <i>{card.type}</i></li>
