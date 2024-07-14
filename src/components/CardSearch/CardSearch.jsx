@@ -21,7 +21,7 @@ function CardSearch() {
   }
 
   const handleResetSearch = () => {
-    dispatch({type: 'RESET_SEARCH'});
+    dispatch({ type: 'RESET_SEARCH' });
     setSearchInput('');
   }
 
@@ -57,15 +57,17 @@ function CardSearch() {
 
   return (
     <div>
-      Search YGOProDeck database:
-      <form id="searchForm" onSubmit={event => handleFormSubmit(event)}>
-        <input className="searchBar" type="text" onChange={event => handleSearchChange(event)} value={searchInput} placeholder="e.g. 'Golden Rule'"/>
-        <input type="submit" />
-      </form>
-      <button className="reset-search" onClick={() => handleResetSearch()}>Clear Search</button>
+      <center>
+        <h2>Search YGOProDeck database:</h2>
+        <form id="searchForm" onSubmit={event => handleFormSubmit(event)}>
+          <input className="searchBar" type="text" onChange={event => handleSearchChange(event)} value={searchInput} placeholder="e.g. 'Golden Rule'" />
+          <input type="submit" />
+        </form>
+        <button className="reset-search" onClick={() => handleResetSearch()}>Clear Search</button>
 
-      <h3>Search Results for: {searchDisplay}</h3>
-      <Box sx={{ flexGrow: 1 }}>
+        <h3>Search Results for: {searchDisplay}</h3>
+      </center>
+      <Box sx={{ flexGrow: 2 }}>
         <Grid container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}

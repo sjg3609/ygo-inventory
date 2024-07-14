@@ -12,7 +12,7 @@ function CardInfoPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  console.log('cardInfoPage check', cardInfo);
+  console.log('cardInfoPage check', cardInfo.card_images.image_url);
 
   const backToSearch = () => {
     dispatch({ type: 'RESET_QUANTITY' })
@@ -71,141 +71,159 @@ function CardInfoPage() {
   }
 
   return (
-    <div>
-      <h2>{cardInfo.name}
-        <br />
-        {
-          cardInfo.type === 'Spell Card' || cardInfo.type === 'Trap Card' ? (
-            <>
-            </>
-          ) : (
-            <sub>
-              Level/Rank {cardInfo.level}
-            </sub>
-          )
-        }
-      </h2>
-      <hr />
+    <center>
       <div>
-        <div id="initial-info">
-          <b>ID:</b> {cardInfo.id}
+        <h2>{cardInfo.name}
           <br />
-          <b>Type:</b> {cardInfo.type}
-        </div>
-        <div id="main-info">
-          <p>
-            <b>Description:</b>
-            <br />
-            {cardInfo.desc}
-          </p>
           {
-            cardInfo.type === 'Spell Card' || cardInfo.type === 'Trap Card' || cardInfo.type === 'Skill Card' ? (
-              <div></div>
+            cardInfo.type === 'Spell Card' || cardInfo.type === 'Trap Card' ? (
+              <>
+              </>
             ) : (
-              <div>
-                <b>ATK:</b> {cardInfo.atk}
-                <b>DEF:</b> {cardInfo.def}
-              </div>
+              <sub>
+                Level/Rank {cardInfo.level}
+              </sub>
             )
           }
-        </div>
-        {
-          cardInfo.hasOwnProperty('card_sets') === false ? (
-            <i>Card Sets are not available in this region</i>
-          ) : (
-            <div id="extra-info">
-              <b>Card Sets:</b>
-              {
-                cardInfo.card_sets.map(set => (
-                  <div key={set.id}>
-                    {set.set_name} <i>({set.set_code})</i>
-                  </div>
-                ))
-              }
-            </div>
-          )
-        }
-        <table id="pricing-table">
-          <thead>
-            <tr>
-              <th>Source</th>
-              <th>Current Price</th>
-            </tr>
-          </thead>
-          <tbody>
+        </h2>
+        <hr />
+        <div>
+          <div id="initial-info">
+            <b>ID:</b> {cardInfo.id}
+            <br />
+            <b>Type:</b> {cardInfo.type}
+          </div>
+          <br/>
+          <div id="card-image">
+            {cardInfo.card_images.map( card => (
+              <img src={card.image_url_cropped}/>
+            )
+              
+            )}
+            
+          </div>
+          <br />
+          <div id="main-info">
+            <p>
+              <b>Description:</b>
+              <br />
+              {cardInfo.desc}
+            </p>
             {
-              cardInfo.hasOwnProperty('card_prices') === false ? (
-                <tr>
-                  <td>No Source</td>
-                  <td>N/A</td>
-                </tr>
+              cardInfo.type === 'Spell Card' || cardInfo.type === 'Trap Card' || cardInfo.type === 'Skill Card' ? (
+                <div></div>
               ) : (
-                <div id="extra-info">
-                  {
-                    cardInfo.card_prices.map(set => (
-                      <div key={set.cardmarket_price}>
-                        <tr>
-                          <td>General Market</td>
-                          <td><i>{set.cardmarket_price}</i></td>
-                        </tr>
-                        <tr>
-                          <td>TCGPlayer</td>
-                          <td><i>{set.tcgplayer_price}</i></td>
-                        </tr>
-                        <tr>
-                          <td>eBay</td>
-                          <td><i>{set.ebay_price}</i></td>
-                        </tr>
-                        <tr>
-                          <td>Amazon</td>
-                          <td><i>{set.amazon_price}</i></td>
-                        </tr>
-                        <tr>
-                          <td>CoolStuffInc.com</td>
-                          <td><i>{set.coolstuffinc_price}</i></td>
-                        </tr>
-                      </div>
-                    ))
-                  }
+                <div>
+                  <b>ATK:</b> {cardInfo.atk}
+                  <b>DEF:</b> {cardInfo.def}
                 </div>
               )
             }
-          </tbody>
-        </table>
+          </div>
+          {
+            cardInfo.hasOwnProperty('card_sets') === false ? (
+              <i>Card Sets are not available in this region</i>
+            ) : (
+              <div id="extra-info">
+                <b>Card Sets:</b>
+                {
+                  cardInfo.card_sets.map(set => (
+                    <div key={set.id}>
+                      {set.set_name} <i>({set.set_code})</i>
+                    </div>
+                  ))
+                }
+              </div>
+            )
+          }
+          <br/>
+          <table id="pricing-table">
 
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Current Price</th>
+              </tr>
+            </thead>
+            <center>
+              <tbody>
+              {
+                cardInfo.hasOwnProperty('card_prices') === false ? (
+                  <tr>
+                    <td>No Source</td>
+                    <td>N/A</td>
+                  </tr>
+                ) : (
+                  <div id="extra-info">
+                    {
+                      cardInfo.card_prices.map(set => (
+                        <div key={set.cardmarket_price}>
+                          <tr>
+                            <td>General Market</td>
+                            <td><i>{set.cardmarket_price}</i></td>
+                          </tr>
+                          <tr>
+                            <td>TCGPlayer</td>
+                            <td><i>{set.tcgplayer_price}</i></td>
+                          </tr>
+                          <tr>
+                            <td>eBay</td>
+                            <td><i>{set.ebay_price}</i></td>
+                          </tr>
+                          <tr>
+                            <td>Amazon</td>
+                            <td><i>{set.amazon_price}</i></td>
+                          </tr>
+                          <tr>
+                            <td>CoolStuffInc.com</td>
+                            <td><i>{set.coolstuffinc_price}</i></td>
+                          </tr>
+                        </div>
+                      ))
+                    }
+                  </div>
+                )
+              }
+            </tbody>
+            </center>
+            
+          </table>
+
+        </div>
+        <hr />
+        <button onClick={backToSearch}>Back to Search</button>
+        <div>
+          <form id="inventory-form" onSubmit={(event) => handleSubmitToInv(event)}>
+            Add this many cards to your Inventory in your <b>{location}:</b> <i>{quantity}</i>
+            <br />
+            <input type="number" placeholder="Enter quantity (e.g. 3)" onChange={(e) => quantityChange(e)} value={numbDisplay} />
+            <select onChange={(e) => locationChange(e)}>
+              <option>Card Box S1</option>
+              <option>Card Box S2</option>
+              <option>Card Box T1</option>
+              <option>Card Box T2</option>
+              <option>Card Box M1 (Big Box)</option>
+              <option>Card Storage E1</option>
+              <option>Card Storage E2</option>
+              <option>Card Storage E3</option>
+              <option>Collector's Binder 1 (Pink)</option>
+              <option>Collector's Binder 2 (Gray)</option>
+              <option>Binder 1 (White)</option>
+              <option>Binder 2 (Black)</option>
+              <option>Single Binder 1 (Red)</option>
+              <option>Single Binder 2 (White)</option>
+              <option>Single Binder 3 (Blue)</option>
+              <option>Personal Single Binder 1 (Black)</option>
+              <option>Personal Deck Box</option>
+              <option>Deck Box (Red)</option>
+              <option>Other (Change Later)</option>
+            </select>
+            <input type="submit" value="Add to Inventory" />
+          </form>
+        </div>
       </div>
-      <hr />
-      <button onClick={backToSearch}>Back to Search</button>
-      <div>
-        <form id="inventory-form" onSubmit={(event) => handleSubmitToInv(event)}>
-          Add this many cards to your Inventory in your <b>{location}:</b> <i>{quantity}</i>
-          <br />
-          <input type="number" placeholder="Enter quantity (e.g. 3)" onChange={(e) => quantityChange(e)} value={numbDisplay} />
-          <select onChange={(e) => locationChange(e)}>
-            <option>Card Box S1</option>
-            <option>Card Box S2</option>
-            <option>Card Box T1</option>
-            <option>Card Box T2</option>
-            <option>Card Box M1 (Big Box)</option>
-            <option>Card Storage E1</option>
-            <option>Card Storage E2</option>
-            <option>Card Storage E3</option>
-            <option>Collector's Binder 1 (Pink)</option>
-            <option>Collector's Binder 2 (Gray)</option>
-            <option>Binder 1 (White)</option>
-            <option>Binder 2 (Black)</option>
-            <option>Single Binder 1 (Red)</option>
-            <option>Single Binder 2 (White)</option>
-            <option>Single Binder 3 (Blue)</option>
-            <option>Personal Single Binder 1 (Black)</option>
-            <option>Personal Deck Box</option>
-            <option>Deck Box (Red)</option>
-            <option>Other (Change Later)</option>
-          </select>
-          <input type="submit" value="Add to Inventory" />
-        </form>
-      </div>
-    </div>
+    </center>
+
   )
 }
 

@@ -9,14 +9,11 @@ function CardItem({ card }) {
   const [gradientFromColor, setGradientFromColor] = useState('transparent');
   const [gradientToColor, setGradientToColor] = useState('transparent');
 
-  const cardData = useSelector(store => store.searchData);
-
-  // console.log('Checking card data', cardData[0].card_images.image_url);
 
   const colorChange = () => {
     if (card.type === 'Normal Monster' || card.type === 'Gemini Monster') {
       setCardColor('#FFE09E');
-    } else if (card.type === 'Toon Monster' || card.type === 'Spirit Monster' || card.type === 'Union Effect Monster' || card.type === 'Effect Monster' || card.type === 'Flip Effect Monster'  || card.type === 'Tuner Monster') {
+    } else if (card.type === 'Toon Monster' || card.type === 'Spirit Monster' || card.type === 'Union Effect Monster' || card.type === 'Effect Monster' || card.type === 'Flip Effect Monster' || card.type === 'Tuner Monster') {
       setCardColor('#B9855D');
       setTextColor('white');
     } else if (card.type === 'Fusion Monster') {
@@ -58,11 +55,11 @@ function CardItem({ card }) {
       setTextColor('white');
       setGradientFromColor('#0C28C0');
       setGradientToColor('#208685');
-    } else if (card.type === 'Synchro Pendulum Effect Monster' ) {
+    } else if (card.type === 'Synchro Pendulum Effect Monster') {
       setTextColor('black');
       setGradientFromColor('white');
       setGradientToColor('#208685');
-    } else if (card.type === 'Pendulum Effect Fusion Monster' ) {
+    } else if (card.type === 'Pendulum Effect Fusion Monster') {
       setTextColor('white');
       setGradientFromColor('#7972AE');
       setGradientToColor('#208685');
@@ -79,19 +76,24 @@ function CardItem({ card }) {
   }, [])
 
   return (
-    <div id="card-item" 
-    style={{ backgroundColor: cardColor, 
-    color: textColor, 
-    backgroundImage: `linear-gradient(0deg, ${gradientToColor}, ${gradientFromColor})`}}>
-      {card.card_images.map(data => (
-        <img src={data.image_url_small}/>
-      ))}
-      <h3><center>{card.name}</center></h3>
-      <ul>
-        <li><b>Type:</b> <i>{card.type}</i></li>
-        <li><b>ID:</b> {card.id}</li>
-      </ul>
-    </div>
+    <center>
+      <div id="card-item"
+        style={{
+          backgroundColor: cardColor,
+          color: textColor,
+          backgroundImage: `linear-gradient(0deg, ${gradientToColor}, ${gradientFromColor})`
+        }}>
+        <br/>
+        {card.card_images.map(data => (
+          <img src={data.image_url_small} />
+        ))}
+        <h3><center>{card.name}</center></h3>
+        <ul>
+          <li><b>Type:</b> <i>{card.type}</i></li>
+          <li><b>ID:</b> {card.id}</li>
+        </ul>
+      </div>
+    </center>
   )
 }
 

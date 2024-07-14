@@ -1,6 +1,7 @@
 #card-item {
-  height: 170px;
-  border: 2px black solid;
+  height: 550px;
+  width: 300px;
+  border: 4px black solid;
   border-radius: 5px;
 }
 
