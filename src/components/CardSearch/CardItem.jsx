@@ -1,9 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './CardStyle.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function CardItem({ card }) {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [cardColor, setCardColor] = useState('transparent');
   const [textColor, setTextColor] = useState('black');
   const [gradientFromColor, setGradientFromColor] = useState('transparent');
@@ -71,6 +75,12 @@ function CardItem({ card }) {
     }
   }
 
+  const handleCardClick = (card) => {
+    dispatch({ type: 'SET_CARD_INFO', payload: card });
+    console.log(`card is clicked! ${card.id}`)
+    history.push('/card-info-page');
+  }
+
   useEffect(() => {
     colorChange();
   }, [])
@@ -85,7 +95,7 @@ function CardItem({ card }) {
         }}>
         <br/>
         {card.card_images.map(data => (
-          <img src={data.image_url_small} />
+          <img src={data.image_url_small} onClick={handleCardClick}/>
         ))}
         <h3><center>{card.name}</center></h3>
         <ul>
