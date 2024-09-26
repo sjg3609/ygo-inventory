@@ -12,7 +12,7 @@ function CardInfoPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  console.log('cardInfoPage check', cardInfo.card_images.image_url);
+  console.log('cardInfoPage check', cardInfo.card_images);
 
   const backToSearch = () => {
     dispatch({ type: 'RESET_QUANTITY' })
@@ -53,7 +53,7 @@ function CardInfoPage() {
         race: cardInfo.race,
         attribute: cardInfo.attribute,
         card_sets: cardInfo.card_sets,
-        card_images: cardInfo.card_images,
+        card_images: cardInfo.card_images.image_url,
         quantity: quantity,
         storage_location: location
       }).then((response) => {
@@ -192,6 +192,7 @@ function CardInfoPage() {
         </div>
         <hr />
         <button onClick={backToSearch}>Back to Search</button>
+        <br/><br/>
         <div>
           <form id="inventory-form" onSubmit={(event) => handleSubmitToInv(event)}>
             Add this many cards to your Inventory in your <b>{location}:</b> <i>{quantity}</i>
@@ -219,6 +220,7 @@ function CardInfoPage() {
               <option>Other (Change Later)</option>
             </select>
             <input type="submit" value="Add to Inventory" />
+            <br/><br/>
           </form>
         </div>
       </div>

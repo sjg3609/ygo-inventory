@@ -6,7 +6,7 @@ const pool = require('../modules/pool.js');
 inventoryRouter.get('/getCards', (req,res) => {
   //! disabled code for more efficient display data -gd
   // const queryText = `SELECT * from "inventory";`;
-  const queryText = `Select "id", "card_id", "card_name", "card_type", "storage_location", "quantity"
+  const queryText = `Select "id", "card_id", "card_name", "card_type", "card_images", "storage_location", "quantity"
   from "inventory" order by "card_name" ASC;`;
   pool.query(queryText).then((result) => {
     res.send(result.rows);
@@ -76,6 +76,7 @@ inventoryRouter.get('/databaseSearch/:id', (req, res) => {
 // TODO POST Requests
 inventoryRouter.post('/addToInv', (req, res) => {
   console.log(`POST to Inventory`);
+  console.log('check req.body.images', req.body.card_images)
   const queryText = `Insert Into "inventory" 
   ("card_name", "card_id", "card_type", "frameType", "desc", 
   "atk", "def", "level", "type", "attribute", "card_sets", 

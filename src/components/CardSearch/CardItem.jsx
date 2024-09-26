@@ -13,7 +13,6 @@ function CardItem({ card }) {
   const [gradientFromColor, setGradientFromColor] = useState('transparent');
   const [gradientToColor, setGradientToColor] = useState('transparent');
 
-
   const colorChange = () => {
     if (card.type === 'Normal Monster' || card.type === 'Gemini Monster') {
       setCardColor('#FFE09E');

@@ -1,8 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './InventoryItem.css'
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function InventoryItem({ card }) {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [cardColor, setCardColor] = useState('transparent');
   const [textColor, setTextColor] = useState('black');
   const [gradientFromColor, setGradientFromColor] = useState('transparent');
@@ -69,21 +74,40 @@ function InventoryItem({ card }) {
     }
   }
 
+  const handleCardClick = (card) => {
+    dispatch({ type: 'SET_CARD_INFO', payload: card });
+    console.log(`card is clicked! ${card.id}`)
+    history.push('/card-info-page');
+  }
+
   useEffect(() => {
     colorChange();
   }, [])
 
+  console.log('Check IventoryItem', card.card_images)
+
   return (
-    <div id="inventory-item"
-      style={{
-        backgroundColor: cardColor,
-        color: textColor,
-        backgroundImage: `linear-gradient(0deg, ${gradientToColor}, ${gradientFromColor})`
-      }}>
-      <b>{card.card_name}</b> || <i>{card.card_type}</i>
-      <br />
-      Location: <b>{card.storage_location}</b> || Quantity: <b>{card.quantity}</b>
-    </div>
+    <center>
+      <div id="inventory-item"
+        style={{
+          backgroundColor: cardColor,
+          color: textColor,
+          backgroundImage: `linear-gradient(0deg, ${gradientToColor}, ${gradientFromColor})`
+        }}>
+        {/* {card.card_images.map(data => (
+        <img src={data.image_url_small} onClick={handleCardClick} />
+      ))}
+      <img src={card.card_images.image_url_small} /> */}
+
+        {card.card_images.map(data => (
+          <img src={data.image_url_small} onClick={handleCardClick} />
+        ))}
+        <b>{card.card_name}</b> || <i>{card.card_type}</i>
+        <br />
+        Location: <b>{card.storage_location}</b> || Quantity: <b>{card.quantity}</b>
+      </div>
+    </center>
+
   )
 }
 
